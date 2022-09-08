@@ -1,0 +1,31 @@
+/* pages/toufang/toufang.wxss */
+page{
+    height: 100%;
+    width:  100%;
+}
+
+.margin{
+    margin-top: 50rpx;
+}
+
+.title {
+    display:grid-line;
+}
+
+.content {
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+image{
+    height: 100rpx;
+    width:  100rpx;
+    border-radius: 50%;
+}
+.item1{
+    margin:20rpx;
+    word-break:break-all;
+    width: 100rpx;
+}
+.item{
+    margin:20rpx;
+}

@@ -1,0 +1,34 @@
+<!--pages/toufang/toufang.wxml-->
+<view>
+
+    <view class="container1">
+        投放情况
+    </view>
+    <scroll-view class="margin" scroll-x="true" scroll-y="true" style="height: 100%;">
+
+        <view class="title" wx:for="{{list}}">
+            <view class="content">
+                <view class="item">
+                    <!-- {{item.pic}} -->
+                    <view wx:if="{{item.pic != 'null'}}">
+                        <image src="{{item.pic}}"/>
+                    </view>
+                    <view wx:else>
+                        <image src="https://i.niupic.com/images/2022/03/05/9VX2.png"></image>
+                    </view>
+                </view>
+
+                <view class="item">{{item.sex}}</view>
+                <view class="item">{{item.phone}}</view>
+                <view class="item">{{item.wechat}}</view>
+                <view class="item1">{{item.wish}}</view>
+                <view class="item1">{{item.region}}</view>
+
+            </view>
+            <button bindtap="change_pic" size="mini" type="primary" data-id ='{{item.id}}'>规范头像</button>
+            <button bindtap="delete" size="mini" type="warn" data-id ='{{item.id}}'>删除</button>
+        </view>
+    </scroll-view>
+
+
+</view>

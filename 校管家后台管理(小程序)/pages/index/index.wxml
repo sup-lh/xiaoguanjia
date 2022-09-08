@@ -1,0 +1,17 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo-avatar">
+    <image src="https://i.niupic.com/images/2022/03/05/9VX2.png" ></image>
+  </view>
+  <form bindsubmit="submit">
+    <view>
+      <text>账号</text>
+      <input class="input" type="text" name='loginName' />
+    </view>
+    <view>
+      <text>密码</text>
+      <input class="input" type="text" name='password' />
+    </view>
+    <button type="primary" form-type='submit'>登录</button>
+  </form>
+</view>

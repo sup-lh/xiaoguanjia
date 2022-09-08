@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.worksMapper">
+  <resultMap id="BaseResultMap" type="com.domain.works">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="push_id" jdbcType="BIGINT" property="pushId" />
+    <result column="push_openid" jdbcType="VARCHAR" property="pushOpenid" />
+    <result column="gain_openid" jdbcType="VARCHAR" property="gainOpenid" />
+    <result column="commit_flag" jdbcType="VARCHAR" property="commitFlag" />
+    <result column="zhifubao" jdbcType="VARCHAR" property="zhifubao" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, push_id, push_openid, gain_openid, commit_flag, zhifubao
+  </sql>
+  <select id="selectByExample" parameterType="com.domain.worksExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from works
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from works
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from works
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.domain.worksExample">
+    delete from works
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.domain.works">
+    insert into works (id, push_id, push_openid, 
+      gain_openid, commit_flag, zhifubao
+      )
+    values (#{id,jdbcType=BIGINT}, #{pushId,jdbcType=BIGINT}, #{pushOpenid,jdbcType=VARCHAR}, 
+      #{gainOpenid,jdbcType=VARCHAR}, #{commitFlag,jdbcType=VARCHAR}, #{zhifubao,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.domain.works">
+    insert into works
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pushId != null">
+        push_id,
+      </if>
+      <if test="pushOpenid != null">
+        push_openid,
+      </if>
+      <if test="gainOpenid != null">
+        gain_openid,
+      </if>
+      <if test="commitFlag != null">
+        commit_flag,
+      </if>
+      <if test="zhifubao != null">
+        zhifubao,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="pushId != null">
+        #{pushId,jdbcType=BIGINT},
+      </if>
+      <if test="pushOpenid != null">
+        #{pushOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="gainOpenid != null">
+        #{gainOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="commitFlag != null">
+        #{commitFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="zhifubao != null">
+        #{zhifubao,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.domain.worksExample" resultType="java.lang.Long">
+    select count(*) from works
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update works
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.pushId != null">
+        push_id = #{record.pushId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pushOpenid != null">
+        push_openid = #{record.pushOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gainOpenid != null">
+        gain_openid = #{record.gainOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commitFlag != null">
+        commit_flag = #{record.commitFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zhifubao != null">
+        zhifubao = #{record.zhifubao,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update works
+    set id = #{record.id,jdbcType=BIGINT},
+      push_id = #{record.pushId,jdbcType=BIGINT},
+      push_openid = #{record.pushOpenid,jdbcType=VARCHAR},
+      gain_openid = #{record.gainOpenid,jdbcType=VARCHAR},
+      commit_flag = #{record.commitFlag,jdbcType=VARCHAR},
+      zhifubao = #{record.zhifubao,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.domain.works">
+    update works
+    <set>
+      <if test="pushId != null">
+        push_id = #{pushId,jdbcType=BIGINT},
+      </if>
+      <if test="pushOpenid != null">
+        push_openid = #{pushOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="gainOpenid != null">
+        gain_openid = #{gainOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="commitFlag != null">
+        commit_flag = #{commitFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="zhifubao != null">
+        zhifubao = #{zhifubao,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.domain.works">
+    update works
+    set push_id = #{pushId,jdbcType=BIGINT},
+      push_openid = #{pushOpenid,jdbcType=VARCHAR},
+      gain_openid = #{gainOpenid,jdbcType=VARCHAR},
+      commit_flag = #{commitFlag,jdbcType=VARCHAR},
+      zhifubao = #{zhifubao,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

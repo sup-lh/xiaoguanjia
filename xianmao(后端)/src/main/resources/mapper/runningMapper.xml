@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.runningMapper">
+  <resultMap id="BaseResultMap" type="com.domain.running">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="km" jdbcType="INTEGER" property="km" />
+    <result column="money" jdbcType="INTEGER" property="money" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.domain.running">
+    <result column="account" jdbcType="LONGVARCHAR" property="account" />
+    <result column="password" jdbcType="LONGVARCHAR" property="password" />
+    <result column="phone" jdbcType="LONGVARCHAR" property="phone" />
+    <result column="nickname" jdbcType="LONGVARCHAR" property="nickname" />
+    <result column="avatarurl" jdbcType="LONGVARCHAR" property="avatarurl" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, km, money
+  </sql>
+  <sql id="Blob_Column_List">
+    account, `password`, phone, nickname, avatarurl
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.domain.runningExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from running
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.domain.runningExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from running
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from running
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from running
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.domain.runningExample">
+    delete from running
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.domain.running">
+    insert into running (id, km, money, 
+      account, `password`, phone, 
+      nickname, avatarurl)
+    values (#{id,jdbcType=BIGINT}, #{km,jdbcType=INTEGER}, #{money,jdbcType=INTEGER}, 
+      #{account,jdbcType=LONGVARCHAR}, #{password,jdbcType=LONGVARCHAR}, #{phone,jdbcType=LONGVARCHAR}, 
+      #{nickname,jdbcType=LONGVARCHAR}, #{avatarurl,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.domain.running">
+    insert into running
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="km != null">
+        km,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="password != null">
+        `password`,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="avatarurl != null">
+        avatarurl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="km != null">
+        #{km,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="avatarurl != null">
+        #{avatarurl,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.domain.runningExample" resultType="java.lang.Long">
+    select count(*) from running
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update running
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.km != null">
+        km = #{record.km,jdbcType=INTEGER},
+      </if>
+      <if test="record.money != null">
+        money = #{record.money,jdbcType=INTEGER},
+      </if>
+      <if test="record.account != null">
+        account = #{record.account,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.password != null">
+        `password` = #{record.password,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.nickname != null">
+        nickname = #{record.nickname,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.avatarurl != null">
+        avatarurl = #{record.avatarurl,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update running
+    set id = #{record.id,jdbcType=BIGINT},
+      km = #{record.km,jdbcType=INTEGER},
+      money = #{record.money,jdbcType=INTEGER},
+      account = #{record.account,jdbcType=LONGVARCHAR},
+      `password` = #{record.password,jdbcType=LONGVARCHAR},
+      phone = #{record.phone,jdbcType=LONGVARCHAR},
+      nickname = #{record.nickname,jdbcType=LONGVARCHAR},
+      avatarurl = #{record.avatarurl,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update running
+    set id = #{record.id,jdbcType=BIGINT},
+      km = #{record.km,jdbcType=INTEGER},
+      money = #{record.money,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.domain.running">
+    update running
+    <set>
+      <if test="km != null">
+        km = #{km,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        account = #{account,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="password != null">
+        `password` = #{password,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="avatarurl != null">
+        avatarurl = #{avatarurl,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.domain.running">
+    update running
+    set km = #{km,jdbcType=INTEGER},
+      money = #{money,jdbcType=INTEGER},
+      account = #{account,jdbcType=LONGVARCHAR},
+      `password` = #{password,jdbcType=LONGVARCHAR},
+      phone = #{phone,jdbcType=LONGVARCHAR},
+      nickname = #{nickname,jdbcType=LONGVARCHAR},
+      avatarurl = #{avatarurl,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.domain.running">
+    update running
+    set km = #{km,jdbcType=INTEGER},
+      money = #{money,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,6 @@
+
+<view style="margin-top: 200rpx;">
+<button type="primary" bindtap="toufang">投放情况</button>
+<button type="primary" bindtap="dingdan"  style="margin-top: 40rpx;">订单</button>
+<button type="primary" bindtap="suggest"  style="margin-top: 40rpx;">建议</button>
+</view>

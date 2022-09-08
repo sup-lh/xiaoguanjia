@@ -1,0 +1,19 @@
+<!--pages/toufang/toufang.wxml-->
+<view>
+
+<view class="container1">
+    订单
+</view>
+<scroll-view class="margin" scroll-x="true" scroll-y="true" style="height: 100%;">
+
+    <view class="title" wx:for="{{list}}">
+        <view class="content">
+            <view class="item1">{{item.pay_time}}</view>
+            <view class="item">{{item.more}}</view>
+            <view class="item">{{item.pay_price}}</view>
+        </view>
+    </view>
+</scroll-view>
+
+
+</view>

@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.helpMapper">
+  <resultMap id="BaseResultMap" type="com.domain.help">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="thing" jdbcType="VARCHAR" property="thing" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="start" jdbcType="VARCHAR" property="start" />
+    <result column="end" jdbcType="VARCHAR" property="end" />
+    <result column="money" jdbcType="INTEGER" property="money" />
+    <result column="touxiang" jdbcType="VARCHAR" property="touxiang" />
+    <result column="thingflag" jdbcType="BIT" property="thingflag" />
+    <result column="pushopenid" jdbcType="VARCHAR" property="pushopenid" />
+    <result column="gainopenid" jdbcType="VARCHAR" property="gainopenid" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="gainphone" jdbcType="VARCHAR" property="gainphone" />
+    <result column="over" jdbcType="BIT" property="over" />
+    <result column="deleteflag" jdbcType="BIT" property="deleteflag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, thing, `time`, `start`, `end`, money, touxiang, thingflag, pushopenid, gainopenid, 
+    phone, gainphone, `over`, deleteflag
+  </sql>
+  <select id="selectByExample" parameterType="com.domain.helpExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from help
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from help
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from help
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.domain.helpExample">
+    delete from help
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.domain.help">
+    insert into help (id, thing, `time`, 
+      `start`, `end`, money, 
+      touxiang, thingflag, pushopenid, 
+      gainopenid, phone, gainphone, 
+      `over`, deleteflag)
+    values (#{id,jdbcType=BIGINT}, #{thing,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
+      #{start,jdbcType=VARCHAR}, #{end,jdbcType=VARCHAR}, #{money,jdbcType=INTEGER}, 
+      #{touxiang,jdbcType=VARCHAR}, #{thingflag,jdbcType=BIT}, #{pushopenid,jdbcType=VARCHAR}, 
+      #{gainopenid,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{gainphone,jdbcType=VARCHAR}, 
+      #{over,jdbcType=BIT}, #{deleteflag,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.domain.help">
+    insert into help
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="thing != null">
+        thing,
+      </if>
+      <if test="time != null">
+        `time`,
+      </if>
+      <if test="start != null">
+        `start`,
+      </if>
+      <if test="end != null">
+        `end`,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="touxiang != null">
+        touxiang,
+      </if>
+      <if test="thingflag != null">
+        thingflag,
+      </if>
+      <if test="pushopenid != null">
+        pushopenid,
+      </if>
+      <if test="gainopenid != null">
+        gainopenid,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="gainphone != null">
+        gainphone,
+      </if>
+      <if test="over != null">
+        `over`,
+      </if>
+      <if test="deleteflag != null">
+        deleteflag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="thing != null">
+        #{thing,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="start != null">
+        #{start,jdbcType=VARCHAR},
+      </if>
+      <if test="end != null">
+        #{end,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=INTEGER},
+      </if>
+      <if test="touxiang != null">
+        #{touxiang,jdbcType=VARCHAR},
+      </if>
+      <if test="thingflag != null">
+        #{thingflag,jdbcType=BIT},
+      </if>
+      <if test="pushopenid != null">
+        #{pushopenid,jdbcType=VARCHAR},
+      </if>
+      <if test="gainopenid != null">
+        #{gainopenid,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="gainphone != null">
+        #{gainphone,jdbcType=VARCHAR},
+      </if>
+      <if test="over != null">
+        #{over,jdbcType=BIT},
+      </if>
+      <if test="deleteflag != null">
+        #{deleteflag,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.domain.helpExample" resultType="java.lang.Long">
+    select count(*) from help
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update help
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.thing != null">
+        thing = #{record.thing,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null">
+        `time` = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.start != null">
+        `start` = #{record.start,jdbcType=VARCHAR},
+      </if>
+      <if test="record.end != null">
+        `end` = #{record.end,jdbcType=VARCHAR},
+      </if>
+      <if test="record.money != null">
+        money = #{record.money,jdbcType=INTEGER},
+      </if>
+      <if test="record.touxiang != null">
+        touxiang = #{record.touxiang,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thingflag != null">
+        thingflag = #{record.thingflag,jdbcType=BIT},
+      </if>
+      <if test="record.pushopenid != null">
+        pushopenid = #{record.pushopenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gainopenid != null">
+        gainopenid = #{record.gainopenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gainphone != null">
+        gainphone = #{record.gainphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.over != null">
+        `over` = #{record.over,jdbcType=BIT},
+      </if>
+      <if test="record.deleteflag != null">
+        deleteflag = #{record.deleteflag,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update help
+    set id = #{record.id,jdbcType=BIGINT},
+      thing = #{record.thing,jdbcType=VARCHAR},
+      `time` = #{record.time,jdbcType=TIMESTAMP},
+      `start` = #{record.start,jdbcType=VARCHAR},
+      `end` = #{record.end,jdbcType=VARCHAR},
+      money = #{record.money,jdbcType=INTEGER},
+      touxiang = #{record.touxiang,jdbcType=VARCHAR},
+      thingflag = #{record.thingflag,jdbcType=BIT},
+      pushopenid = #{record.pushopenid,jdbcType=VARCHAR},
+      gainopenid = #{record.gainopenid,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      gainphone = #{record.gainphone,jdbcType=VARCHAR},
+      `over` = #{record.over,jdbcType=BIT},
+      deleteflag = #{record.deleteflag,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.domain.help">
+    update help
+    <set>
+      <if test="thing != null">
+        thing = #{thing,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        `time` = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="start != null">
+        `start` = #{start,jdbcType=VARCHAR},
+      </if>
+      <if test="end != null">
+        `end` = #{end,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=INTEGER},
+      </if>
+      <if test="touxiang != null">
+        touxiang = #{touxiang,jdbcType=VARCHAR},
+      </if>
+      <if test="thingflag != null">
+        thingflag = #{thingflag,jdbcType=BIT},
+      </if>
+      <if test="pushopenid != null">
+        pushopenid = #{pushopenid,jdbcType=VARCHAR},
+      </if>
+      <if test="gainopenid != null">
+        gainopenid = #{gainopenid,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="gainphone != null">
+        gainphone = #{gainphone,jdbcType=VARCHAR},
+      </if>
+      <if test="over != null">
+        `over` = #{over,jdbcType=BIT},
+      </if>
+      <if test="deleteflag != null">
+        deleteflag = #{deleteflag,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.domain.help">
+    update help
+    set thing = #{thing,jdbcType=VARCHAR},
+      `time` = #{time,jdbcType=TIMESTAMP},
+      `start` = #{start,jdbcType=VARCHAR},
+      `end` = #{end,jdbcType=VARCHAR},
+      money = #{money,jdbcType=INTEGER},
+      touxiang = #{touxiang,jdbcType=VARCHAR},
+      thingflag = #{thingflag,jdbcType=BIT},
+      pushopenid = #{pushopenid,jdbcType=VARCHAR},
+      gainopenid = #{gainopenid,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      gainphone = #{gainphone,jdbcType=VARCHAR},
+      `over` = #{over,jdbcType=BIT},
+      deleteflag = #{deleteflag,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
